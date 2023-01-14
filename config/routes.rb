@@ -7,8 +7,9 @@ Rails.application.routes.draw do
   get "home/about"=>"homes#about"
   
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
+    resources :book_comments, only: [:create, :destroy]
     resource :favorites, only: [:create, :destroy]
-    # ※resources →　resource 「s」をなくすことで、URLに/:idが含まれなくなる。
+    # ※resources → resource 「s」をなくすことで、URLに/:idが含まれなくなる。
     # いいね機能は1人のユーザーが1つの投稿にいいねを押すことが出来るのが１回のみなのでURLにparams[:id]を使わなくても良いので「ｓ」を無くした書き方にしている。
   end
   resources :users, only: [:index,:show,:edit,:update]
