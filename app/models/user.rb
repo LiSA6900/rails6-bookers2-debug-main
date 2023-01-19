@@ -41,4 +41,15 @@ class User < ApplicationRecord
     followings.include?(user)
   end
   
+  def self.search_for(content, method)
+    if method == 'perfect' # 名前が完全一致
+      User.where(name: content)
+    elsif method == 'forward' # 名前が前方一致
+      User.where('name LIKE?', content + '%')
+    elsif method == 'backward' # 名前が後方一致
+      User.where('name LIKE?', '%' + content)
+    else # 名前が部分一致
+      User.where('name LIKE ?', '%' + content + '%')
+    end
+  end
 end
