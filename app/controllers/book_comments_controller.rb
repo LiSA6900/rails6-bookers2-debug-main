@@ -1,15 +1,18 @@
 class BookCommentsController < ApplicationController
   def create
     book = Book.find(params[:book_id])
-    comment = current_user.book_comments.new(book_comment_params)
-    comment.book_id = book.id
-    comment.save
-    redirect_to request.referer #request.referer:遷移元のURLを取得してリダイレクトする
+    @comment = current_user.book_comments.new(book_comment_params)
+    @comment.book_id = book.id
+    @comment.save
+    # 非同期通信にするために下記削除
+    # redirect_to request.referer ※request.referer:遷移元のURLを取得してリダイレクトする
   end
 
   def destroy
-    BookComment.find_by(id: params[:id], book_id: params[:book_id]).destroy
-    redirect_to request.referer
+    @comment = BookComment.find(params[:id])
+    @comment.destroy
+    # 非同期通信にするために下記削除
+    # redirect_to request.referer
   end
 
   private
