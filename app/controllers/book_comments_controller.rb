@@ -4,14 +4,14 @@ class BookCommentsController < ApplicationController
     @comment = current_user.book_comments.new(book_comment_params)
     @comment.book_id = book.id
     @comment.save
-    # 非同期通信にするために下記削除
+    # 非同期通信にするために下記削除する
     # redirect_to request.referer ※request.referer:遷移元のURLを取得してリダイレクトする
   end
 
   def destroy
     @comment = BookComment.find(params[:id])
     @comment.destroy
-    # 非同期通信にするために下記削除
+    # 非同期通信にするために下記削除する
     # redirect_to request.referer
   end
 
