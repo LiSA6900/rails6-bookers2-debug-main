@@ -3,6 +3,8 @@ class ChatsController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    # pluckメソッドは、全てのデータではなく特定のカラムの値だけ取得したい場合に使うと便利
+    #【参考URL】https://pikawaka.com/rails/pluck
     rooms = current_user.user_rooms.pluck(:room_id)
     user_rooms = UserRoom.find_by(user_id: @user.id, room_id: rooms)
     
@@ -10,7 +12,7 @@ class ChatsController < ApplicationController
       @room = user_rooms.room
     else
       @room = Room.new
-      @room .save
+      @room.save
       UserRoom.create(user_id: current_user.id, room_id: @room.id)
       UserRoom.create(user_id: @user.id, room_id: @room.id)
     end
