@@ -9,7 +9,7 @@ class GroupsController < ApplicationController
   
   def index
     @book = Book.new
-    @groups = Groups.all
+    @groups = Group.all
   end
   
   def show
