@@ -14,7 +14,7 @@ class GroupsController < ApplicationController
   
   def show
     @book = Book.new
-    @group = group.find(params[:id])
+    @group = Group.find(params[:id])
   end
   
   def create
