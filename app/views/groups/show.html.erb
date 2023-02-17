@@ -24,10 +24,16 @@
             <td><%= image_tag @group.get_image, size: '50x50' %></td>
             <td><%= @group.name %></td>
             <td><%= @group.introduction %></td>
-            
+            <td>
+              <% @group.users.each do |user| &>
+                <li style="list-style: none;"><%= user.name %></li>
+              <% end %>
+            </td>
             <td>
               <% if @group.is_owned_by?(current_user) %>
                 <%= link_to 'Edit', edit_group_path(@group), class: "btn btn-sm btn-success" %>
+              <% elsif @group.includesUser?(current_user) %>
+                <%= link_to 'Leave this group', group_
               <% end %>
             </td>
           </tr>
