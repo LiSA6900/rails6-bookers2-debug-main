@@ -4,6 +4,7 @@ class CreateBooks < ActiveRecord::Migration[6.1]
       t.string :title
       t.text :body
       t.integer :user_id
+      t.float :rate #【データ型】float : 浮動小数
       t.timestamps
     end
   end
